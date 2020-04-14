@@ -1,0 +1,54 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+
+
+{{#if greeting}}
+    <p>{{greeting}}</p>
+{{/if }}
+
+{{#if city}}
+    <h2>{{city}}</h2>
+{{/if}}
+
+
+<form action="/weather" method="GET">
+    <input name="city" placeholder="city" required>
+    <button type="submit" class="btn btn-outline-primary">Look up city</button>   
+</form>
+
+
+<div class="container mt-5">
+    {{#if currently}}
+    <div class="row d-flex justify-content-center">
+        <div class="currently text-center">
+            <h2>{{currently.temperature}}<span class="text-danger">°F</span> | 
+            {{currently.celcius}} <span class="text-danger">°C</span></h2>
+            <h3 class="text-center">{{currently.summary}}</h3>
+            <h5 class="text-center">{{currently.time}}</h5>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center my-3">
+        <div class="mr-4">
+            Precipitation: {{currently.precipitation}}%
+        </div>
+        <div class="mr-4">
+            Humidity: {{currently.humidity}}%
+        </div>
+        <div class="mr-4">
+            Wind: {{currently.windSpeed}}km/h
+        </div>
+    </div>
+    {{/if}}
+    {{#if hourly}}
+    <div class="row d-flex justify-content-center mt-5">
+        {{#each hourly.data}}
+        <div class="hourly mx-5 text-center">
+           <div>{{time}}</div>
+           <div>{{day}}</div>
+           <div>{{temperature}}<span class="text-danger">°F</span> | {{celcius}}<span class="text-danger">°C</span></div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>
